@@ -19,13 +19,6 @@ An **unbeatable Tic-Tac-Toe game** powered by the Minimax algorithm — built us
 - 🧠 **Unbeatable Gameplay**  
   The AI never loses. It’s designed to win or draw — never to be fooled!
 
-- 💻 **Console-Based Interface**  
-  Clean and interactive terminal interface with move-by-move updates and intuitive prompts.
-
----
-
-## 🚀 Further Developmentd
-
 - 🖼️ **Graphical Interface with OpenGL**  
   Upgraded from a text-based interface to a graphical version using **OpenGL** for rendering the game board, player symbols, and animations.
 
@@ -33,8 +26,37 @@ An **unbeatable Tic-Tac-Toe game** powered by the Minimax algorithm — built us
   Allow players to click on the board using a mouse instead of typing coordinates, creating a smoother and more intuitive experience.
 
 - 🌐 **Cross-Platform Support**  
-  Use **CMake**, **GLFW**, and **OpenGL** to make the application fully cross-platform, supporting Windows, Linux, and macOS.
+  Used **CMake**, **GLFW**, and **OpenGL** to make the application fully cross-platform, supporting Windows, Linux, and macOS.
 
+---
+##TRY IT YOURSELF
+-download exe folder.
+-and just run the exe file and enjoy 😊😊.
+
+## 🕹️ How to Play
+
+- The game begins with **O**'s turn — that’s you!
+- **Left-click** on any empty cell to place your move.
+- The AI (X) uses the **Minimax** algorithm to immediately respond.
+- The game ends when:
+  - A player wins (3 in a row), or
+  - The board is full (draw).
+- A message will pop up when the game ends, and the board will freeze until you restart.
+
+---
+
+
+
+
+### ✅ Prerequisites to run the project
+
+- C++17 compatible compiler (g++, clang++, MSVC)
+- [CMake](https://cmake.org/download/)
+- [GLFW](https://www.glfw.org/)
+- [GLAD](https://glad.dav1d.de/) (used to load OpenGL functions)
+- [stb_image](https://github.com/nothings/stb) (for texture loading)
+- OpenGL 3.3+
+- Git (optional)
 
 ---
 
