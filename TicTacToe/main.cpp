@@ -22,6 +22,56 @@ char board[SIZE][SIZE] = {
 };
 bool isMove = true; // o's turn
 
+char winner = ' ';       // 'o', 'x', or 'd' for draw
+bool gameOver = false;   // true if the game is over
+
+void checkWinner() {
+	// Check rows and columns
+	for (int i = 0; i < SIZE; ++i) {
+		if (board[i][0] != ' ' &&
+			board[i][0] == board[i][1] &&
+			board[i][1] == board[i][2]) {
+			winner = board[i][0];
+			gameOver = true;
+			return;
+		}
+		if (board[0][i] != ' ' &&
+			board[0][i] == board[1][i] &&
+			board[1][i] == board[2][i]) {
+			winner = board[0][i];
+			gameOver = true;
+			return;
+		}
+	}
+
+	// Check diagonals
+	if (board[0][0] != ' ' &&
+		board[0][0] == board[1][1] &&
+		board[1][1] == board[2][2]) {
+		winner = board[0][0];
+		gameOver = true;
+		return;
+	}
+	if (board[0][2] != ' ' &&
+		board[0][2] == board[1][1] &&
+		board[1][1] == board[2][0]) {
+		winner = board[0][2];
+		gameOver = true;
+		return;
+	}
+
+	// Check for draw
+	bool draw = true;
+	for (int i = 0; i < SIZE; ++i)
+		for (int j = 0; j < SIZE; ++j)
+			if (board[i][j] == ' ')
+				draw = false;
+
+	if (draw) {
+		winner = 'd';
+		gameOver = true;
+	}
+}
 
 
 int  main()
@@ -120,43 +170,57 @@ int  main()
 		//draw_cell(8, false, moveShader, texX, texO); // Draw O in top-left
 		draw_grid(gridShader, gridVAO);
 		
-		// user input logic
 
-		if (isMove) {
-			if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
-				double xpos, ypos;
-				glfwGetCursorPos(window, &xpos, &ypos);
-				// Convert mouse position to NDC
-				float xNDC = (xpos / 400.0f) - 1.0f; // Assuming window width is 800
-				float yNDC = 1.0f - (ypos / 400.0f); // Assuming window height is 800
-				// Determine cell index based on NDC coordinates
-				int col = static_cast<int>((xNDC + 1.0f) * SIZE / 2.0f);
-				int row = static_cast<int>((1.0f - yNDC) * SIZE / 2.0f);
-				if (col >= 0 && col < SIZE && row >= 0 && row < SIZE && board[row][col] == ' ') {
-					board[row][col] = isMove ? 'o' : 'x'; // Place X or O
-					isMove = !isMove; // Switch turn
+		//check if the game is over
+		checkWinner();
+
+
+		// user input logic
+		if (!gameOver) {
+			if (isMove) {
+				if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+					double xpos, ypos;
+					glfwGetCursorPos(window, &xpos, &ypos);
+					// Convert mouse position to NDC
+					float xNDC = (xpos / 400.0f) - 1.0f; // Assuming window width is 800
+					float yNDC = 1.0f - (ypos / 400.0f); // Assuming window height is 800
+					// Determine cell index based on NDC coordinates
+					int col = static_cast<int>((xNDC + 1.0f) * SIZE / 2.0f);
+					int row = static_cast<int>((1.0f - yNDC) * SIZE / 2.0f);
+					if (col >= 0 && col < SIZE && row >= 0 && row < SIZE && board[row][col] == ' ') {
+						board[row][col] = isMove ? 'o' : 'x'; // Place X or O
+						isMove = !isMove; // Switch turn
+					}
 				}
 			}
 		}
 
 		//computer move logic
 		
-		if (!isMove) {
+		if (!isMove&&!gameOver) {
 			computerMove(isMove);
 		}
 
 
-		// ImGUI window creation
-		ImGui::Begin("My name is window, ImGUI window");
-		// Text that appears in the window
-		ImGui::Text("Hello there adventurer!");
-		// Checkbox that appears in the window
-		ImGui::Checkbox("Draw Triangle", &drawTriangle);
-		// Slider that appears in the window
-		ImGui::SliderFloat("Size", &size, 0.5f, 2.0f);
-		// Fancy color editor that appears in the window
-		ImGui::ColorEdit4("Color", color);
-		// Ends the window
+		ImGui::Begin(" ImGUI window");
+		//ImGui::Button("Restart");
+
+		// Show game result
+		if (gameOver) {
+			if (winner == 'o') ImGui::Text("Game Over: You Win!");
+			else if (winner == 'x') ImGui::Text("Game Over: Computer Wins!");
+			else if (winner == 'd') ImGui::Text("Game Over: It's a Draw!");
+			if (ImGui::Button("Restart")) {
+				// Reset board
+				for (int i = 0; i < SIZE; ++i)
+					for (int j = 0; j < SIZE; ++j)
+						board[i][j] = ' ';
+				gameOver = false;
+				winner = ' ';
+				isMove = true;
+			}
+		}
+
 		ImGui::End();
 
 
