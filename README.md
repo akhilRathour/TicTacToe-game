@@ -32,7 +32,8 @@ An **unbeatable Tic-Tac-Toe game** powered by the Minimax algorithm — built us
 
 ## 📦 Try It Yourself
 
-**[🔗 Download EXE Folder](https://your-link-here.com/download)**  
+[⬇️ Download TicTacToe Game (.exe)](https://github.com/akhilRathour/TicTacToe-game/raw/master/exe/yourfile.exe)
+
 Just download the folder, run the `.exe` file, and enjoy 😊😊.
 
 > Make sure to extract the folder completely before running the executable.
