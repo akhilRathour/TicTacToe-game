@@ -29,9 +29,13 @@ An **unbeatable Tic-Tac-Toe game** powered by the Minimax algorithm — built us
   Used **CMake**, **GLFW**, and **OpenGL** to make the application fully cross-platform, supporting Windows, Linux, and macOS.
 
 ---
-##TRY IT YOURSELF
--download exe folder.
--and just run the exe file and enjoy 😊😊.
+
+## 📦 Try It Yourself
+
+**[🔗 Download EXE Folder](https://your-link-here.com/download)**  
+Just download the folder, run the `.exe` file, and enjoy 😊😊.
+
+> Make sure to extract the folder completely before running the executable.
 ---
 ## 🕹️ How to Play
 
