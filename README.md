@@ -32,7 +32,7 @@ An **unbeatable Tic-Tac-Toe game** powered by the Minimax algorithm — built us
 ##TRY IT YOURSELF
 -download exe folder.
 -and just run the exe file and enjoy 😊😊.
-
+---
 ## 🕹️ How to Play
 
 - The game begins with **O**'s turn — that’s you!
